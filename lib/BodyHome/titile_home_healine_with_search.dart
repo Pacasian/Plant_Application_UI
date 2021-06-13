@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
+import '../constrants.dart';
 
 class HeadlineWithSearch extends StatelessWidget {
   const HeadlineWithSearch({
@@ -11,6 +14,7 @@ class HeadlineWithSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(bottom: kDefaultPadding * 2.5),
       height: size.height * 0.25,
       child: Stack(
         children: [
