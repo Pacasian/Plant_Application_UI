@@ -44,3 +44,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+
+#github token for the project
+#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
