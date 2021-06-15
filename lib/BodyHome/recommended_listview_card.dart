@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:plant_sumith_project/BodyHome/recommend_plant_card.dart';
 import 'package:plant_sumith_project/DetailsPage/details_home.dart';
+import 'package:plant_sumith_project/Model/model_class.dart';
 import '../constrants.dart';
 
 class RecommendedListViewCard extends StatelessWidget {
   const RecommendedListViewCard({
     Key? key,
-    required this.imageList,
-    required this.titleList,
-    required this.priceList,
-    required this.countryList,
+    required this.resVal,
+    // required this.imageList,
+    // required this.titleList,
+    // required this.priceList,
+    // required this.countryList,
   }) : super(key: key);
-
-  final List<String> imageList;
-  final List<String> titleList;
-  final List<int> priceList;
-  final List<String> countryList;
+  final List<RecommendPlant>? resVal;
+  // final List<String> imageList;
+  // final List<String> titleList;
+  // final List<int> priceList;
+  // final List<String> countryList;
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +26,12 @@ class RecommendedListViewCard extends StatelessWidget {
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: imageList.length,
+        itemCount: resVal!.length,
         itemBuilder: (BuildContext context, int index) => RecommendPlantCard(
-          image: imageList[index],
-          title: titleList[index],
-          price: priceList[index],
-          country: countryList[index],
+          image: resVal![index].image,
+          title: resVal![index].title,
+          price: resVal![index].price,
+          country: resVal![index].country,
           press: () {
             // ignore: avoid_print
             print("Working\nMoving to Details Page with Index $index");

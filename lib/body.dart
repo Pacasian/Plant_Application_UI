@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:plant_sumith_project/BodyHome/bottom_plant_listview_card_and_heading.dart';
@@ -12,9 +13,23 @@ import 'package:plant_sumith_project/BodyHome/recommend_with_more.dart';
 import 'package:plant_sumith_project/BodyHome/recommended_listview_card.dart';
 import 'package:plant_sumith_project/BodyHome/titile_home_healine_with_search.dart';
 import 'package:plant_sumith_project/constrants.dart';
+import 'package:plant_sumith_project/Model/model_class.dart';
+import 'package:http/http.dart' as http;
 
 // ignore: use_key_in_widget_constructors
 class Body extends StatelessWidget {
+  Body(this.userName_fromHomeScreen);
+  final String userName_fromHomeScreen;
+
+  Stream<List<RecommendPlant>> getRecommendCardDetails() async* {
+    yield* Stream.periodic(Duration(seconds: 3), (_) async {
+      var response = await http.get(Uri.parse('http://192.168.1.102:3000/api/v1/recommendplants'));
+      var jsonString = response.body;
+
+      return recommendPlantFromJson(jsonString);
+    }).asyncMap((event) async => await event);
+  }
+
   @override
   Widget build(BuildContext context) {
     List<String> imageList = [
@@ -38,11 +53,15 @@ class Body extends StatelessWidget {
     ];
 
     Size size = MediaQuery.of(context).size;
+
     return SingleChildScrollView(
       child: Column(
         children: [
           // ignore: sized_box_for_whitespace
-          HeadlineWithSearch(size: size),
+          HeadlineWithSearch(
+            size: size,
+            userName_fromBody: userName_fromHomeScreen,
+          ),
           // ignore: avoid_unnecessary_containers, sized_box_for_whitespace
           RecommendedAndMore(
             recommend: "Recommended",
@@ -52,8 +71,22 @@ class Body extends StatelessWidget {
               print("Hai");
             },
           ),
-          RecommendedListViewCard(
-              imageList: imageList, titleList: titleList, priceList: priceList, countryList: countryList),
+          StreamBuilder<List<RecommendPlant>>(
+              stream: getRecommendCardDetails(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  var resVal = snapshot.data;
+                  return RecommendedListViewCard(resVal: resVal);
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: kPrimaryColor,
+                    ),
+                  );
+                }
+                // return RecommendedListViewCard(
+                //     imageList: imageList, titleList: titleList, priceList: priceList, countryList: countryList);
+              }),
           RecommendedAndMore(
             recommend: "Featured Plants",
             more: "More",

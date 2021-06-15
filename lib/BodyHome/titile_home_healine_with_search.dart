@@ -7,9 +7,11 @@ class HeadlineWithSearch extends StatelessWidget {
   const HeadlineWithSearch({
     Key? key,
     required this.size,
+    required this.userName_fromBody,
   }) : super(key: key);
 
   final Size size;
+  final String userName_fromBody;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class HeadlineWithSearch extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Text(
-                  'Hi Sumith@! ',
+                  userName_fromBody.isEmpty ? 'Hi Sumith@! ' : 'Hi ${userName_fromBody.toUpperCase()}@!',
                   style: Theme.of(context).textTheme.headline5!.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

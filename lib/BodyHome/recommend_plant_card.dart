@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plant_sumith_project/BodyHome/newtork_image_recommend_plant_card.dart';
 import '../constrants.dart';
 
 class RecommendPlantCard extends StatelessWidget {
@@ -18,6 +19,7 @@ class RecommendPlantCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    // print(image);
     return Container(
       margin: const EdgeInsets.only(
         left: kDefaultPadding,
@@ -28,7 +30,11 @@ class RecommendPlantCard extends StatelessWidget {
       width: size.width * 0.4,
       child: Column(
         children: [
-          Image.asset(image),
+          // Image.asset(image),
+          // NetworkImageRecommendPlant(
+          //   imgUrl: image,
+          // ),
+          Image.network(image),
           GestureDetector(
             onTap: press,
             child: Container(

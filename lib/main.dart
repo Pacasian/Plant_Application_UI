@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+
+import 'package:plant_sumith_project/LoginAndRegister/login_screen1.dart';
 import 'package:plant_sumith_project/constrants.dart';
 import 'package:plant_sumith_project/home_screen.dart';
+// import 'package:plant_sumith_project/sampleWork/sample.dart';
+// import 'package:plant_sumith_project/sampleWork/sample_1.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+const SERVER_URL = '117.193.37.61';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -22,7 +28,9 @@ class MyApp extends StatelessWidget {
             ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Homescreen(),
+      // home: PeriodicRequester(),
+      home: LoginScreenData(),
+      // home: Homescreen(),
     );
   }
 }

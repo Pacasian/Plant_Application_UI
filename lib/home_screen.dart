@@ -4,15 +4,41 @@ import 'package:plant_sumith_project/body.dart';
 import 'package:plant_sumith_project/constrants.dart';
 
 class Homescreen extends StatelessWidget {
+  Homescreen(this.userName);
+  final String userName;
+  //
+  // static const snackBarDuration = Duration(seconds: 3);
+  // //
+  // final snackBar = SnackBar(
+  //   content: Text('Press back again to leave'),
+  //   duration: snackBarDuration,
+  // );
+
+  //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: Body(),
+      body: Body(userName),
       bottomNavigationBar: const BottomNavHome(),
     );
   }
 
+//   Future<bool> handleWillPop(BuildContext context) async {
+//     DateTime backButtonPressTime;
+//     final now = DateTime.now();
+//     final backButtonHasNotBeenPressedOrSnackBarHasBeenClosed =
+//         now.difference(backButtonPressTime) > snackBarDuration;
+//
+//     if (backButtonHasNotBeenPressedOrSnackBarHasBeenClosed) {
+//       backButtonPressTime = now;
+//       Scaffold.of(context).showSnackBar(snackBar);
+//       return false;
+//     }
+//
+//     return true;
+//   }
+// }
   AppBar buildAppBar() {
     return AppBar(
       elevation: 0.0,
